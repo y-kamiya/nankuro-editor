@@ -18,7 +18,7 @@ export default class FieldComponent extends React.Component {
         );
     }
 
-    createTable(callback) {
+    createTable() {
         let rowNum = this.state.fieldSize.rowNum;
         let colNum = this.state.fieldSize.colNum;
 

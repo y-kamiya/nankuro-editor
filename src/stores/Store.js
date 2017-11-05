@@ -6,6 +6,7 @@ let instance = null;
 
 class Store extends EventEmitter {
     get CREATE_FIELD() { return 'create_field' };
+    get INPUT_ANSWER() { return 'input_answer' };
 
     get STATE_INITIAL() { return 0 };
     get STATE_FIELD_CREATED() { return 1 };
@@ -53,6 +54,9 @@ class Store extends EventEmitter {
                 this.appState = this.STATE_FIELD_CREATED;
                 this.emitNewAppState();
                 break;
+            case AppActions.INPUT_ANSWER_ACTION:
+                this.emit(this.INPUT_ANSWER);
+                break;
         }
     }
 
@@ -61,6 +65,11 @@ class Store extends EventEmitter {
         this.cells = data.data;
         this.fieldSize.rowNum = this.cells.length;
         this.fieldSize.colNum = this.cells[0].length;
+    }
+
+    getTagMax() {
+        let flattened = Array.prototype.concat.apply([], this.cells);
+        return Math.max.apply(null, flattened);
     }
 
     getCellTag(row, col) {
