@@ -21,7 +21,6 @@ export default class Component extends React.Component {
             <div>
                 <AnswerComponent />
                 <FieldComponent />
-                // <ButtonComponent />
             </div>
         );
     }

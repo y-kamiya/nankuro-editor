@@ -11,12 +11,17 @@ export default class FieldCellComponent extends React.Component {
     }
 
     render() {
-        let className = 'default';
-        return <td className={className}>{this.state.value}</td>;
+        let className = this.getClassName();
+        let value = this.isBlack() ? "" : this.state.value;
+        return <td className={className}>{value}</td>;
+    }
+
+    isBlack() {
+        return this.props.tag <= 0;
     }
 
     getClassName() {
-        if (this.props.tag < 0) {
+        if (this.isBlack()) {
             return 'black';
         }
         return 'default';

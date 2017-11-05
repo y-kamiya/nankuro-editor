@@ -16,7 +16,7 @@ export default class AnswerComponent extends React.Component {
         let tagMax = Store.getTagMax();
         var rowTh = [];
         var rowTd = [];
-        for (let tag = 0; tag < tagMax; tag++) {
+        for (let tag = 1; tag <= tagMax; tag++) {
             rowTh.push(<th key={tag}>{tag}</th>);
             rowTd.push(<td key={tag}><AnswerCellComponent key={tag} tag={tag} /></td>);
         }
