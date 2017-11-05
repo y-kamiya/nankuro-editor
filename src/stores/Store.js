@@ -12,6 +12,7 @@ class Store extends EventEmitter {
     get STATE_FIELD_CREATED() { return 1 };
 
     get NO_CELL() { return -1 };
+    get NO_ANSWER() { return "" };
 
     constructor() {
         if (instance) {
@@ -24,6 +25,7 @@ class Store extends EventEmitter {
             colNum: 5,
         };
         this.loadCells();
+        this.answers = [];
         this.appState = this.STATE_INITIAL;
         AppDispatcher.register(this.onAction.bind(this));
         this.setMaxListeners(1000);
@@ -55,6 +57,7 @@ class Store extends EventEmitter {
                 this.emitNewAppState();
                 break;
             case AppActions.INPUT_ANSWER_ACTION:
+                this.answers[payload.tag] = payload.value;
                 this.emit(this.INPUT_ANSWER);
                 break;
         }
@@ -74,6 +77,13 @@ class Store extends EventEmitter {
 
     getCellTag(row, col) {
         return this.cells[row][col];
+    }
+
+    getAnswer(tag) {
+        if (this.answers[tag]) {
+            return this.answers[tag];
+        }
+        return this.NO_ANSWER;
     }
 }
 

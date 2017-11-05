@@ -10,10 +10,11 @@ class AppActions {
         });
     }
 
-    inputAnswer(tag) {
+    inputAnswer(tag, value) {
         AppDispatcher.dispatch({
-            actionType: this.CREATE_FIELD_ACTION,
-            value: tag
+            actionType: this.INPUT_ANSWER_ACTION,
+            tag: tag,
+            value: value
         });
     }
 }

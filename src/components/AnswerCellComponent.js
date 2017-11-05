@@ -7,13 +7,14 @@ export default class AnswerCellComponent extends React.Component {
         super(props);
     }
 
-    onClick() {
+    onBlur(event) {
         let tag = this.props.tag;
-        AppActions.inputAnswer(tag);
+        let value = event.target.value;
+        AppActions.inputAnswer(tag, value);
     }
 
     render() {
-        return <input type="text" onClick={this.onClick.bind(this)} />
+        return <input type="text" onBlur={this.onBlur.bind(this)} />
     }
 }
 
