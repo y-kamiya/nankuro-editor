@@ -17,7 +17,7 @@ export default class FieldCellComponent extends React.Component {
     }
 
     isBlack() {
-        return this.props.tag <= 0;
+        return this.state.value <= 0;
     }
 
     getClassName() {

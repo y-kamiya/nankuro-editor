@@ -72,7 +72,8 @@ class Store extends EventEmitter {
 
     getTagMax() {
         let flattened = Array.prototype.concat.apply([], this.cells);
-        return Math.max.apply(null, flattened);
+        let filtered = flattened.filter(Number.isInteger);
+        return Math.max.apply(null, filtered);
     }
 
     getCellTag(row, col) {
