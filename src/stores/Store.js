@@ -7,6 +7,7 @@ let instance = null;
 class Store extends EventEmitter {
     get CREATE_FIELD() { return 'create_field' };
     get INPUT_ANSWER() { return 'input_answer' };
+    get FOCUS_TAG() { return 'focus_tag' };
 
     get STATE_INITIAL() { return 0 };
     get STATE_FIELD_CREATED() { return 1 };
@@ -26,6 +27,7 @@ class Store extends EventEmitter {
         };
         this.loadCells();
         this.answers = [];
+        this.focused_tag = 0;
         this.appState = this.STATE_INITIAL;
         AppDispatcher.register(this.onAction.bind(this));
         this.setMaxListeners(1000);
@@ -60,6 +62,10 @@ class Store extends EventEmitter {
                 this.answers[payload.tag] = payload.value;
                 this.emit(this.INPUT_ANSWER);
                 break;
+            case AppActions.FOCUS_TAG_ACTION:
+                this.focused_tag = payload.tag;
+                this.emit(this.FOCUS_TAG);
+                break;
         }
     }
 
@@ -85,6 +91,10 @@ class Store extends EventEmitter {
             return this.answers[tag];
         }
         return this.NO_ANSWER;
+    }
+
+    getFocusTag() {
+        return this.focused_tag;
     }
 }
 

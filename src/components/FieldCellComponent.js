@@ -7,6 +7,7 @@ export default class FieldCellComponent extends React.Component {
         super(props);
         this.state = {
             value: this.props.tag,
+            isFocused: false,
         }
     }
 
@@ -25,6 +26,15 @@ export default class FieldCellComponent extends React.Component {
     }
 
     getClassName() {
+        let classList = [];
+        if (this.state.isFocused) {
+            classList.push('bg-primary');
+        }
+        classList.push(this.getCellType());
+        return classList.join(' ');
+    }
+
+    getCellType() {
         if (this.isBlack()) {
             return 'black';
         }
@@ -39,10 +49,19 @@ export default class FieldCellComponent extends React.Component {
         let value = Store.getAnswer(tag);
         let updated = value === Store.NO_ANSWER ? tag : value;
         this.setState({value: updated});
+        this.setState({isFocused: false});
+    }
+
+    focusTag() {
+        if (Store.getFocusTag() !== this.props.tag) {
+            return;
+        }
+        this.setState({isFocused: true});
     }
 
     componentDidMount() {
         Store.addEventListener(Store.INPUT_ANSWER, this.updateCell.bind(this));
+        Store.addEventListener(Store.FOCUS_TAG, this.focusTag.bind(this));
     }
 }
 
