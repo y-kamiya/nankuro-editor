@@ -37,6 +37,17 @@ td > input[type=text] {
     text-align: center;
 }
 
+td.tag {
+    font-size: 14px;
+    text-align: left;
+    vertical-align: top;
+    padding-left: 2px;
+}
+
+td.character {
+    font-size: 36px;
+}
+
 #buttons: {
     margin-top: 20px;
 }

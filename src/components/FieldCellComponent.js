@@ -20,11 +20,18 @@ export default class FieldCellComponent extends React.Component {
         return this.state.value <= 0;
     }
 
+    isTag() {
+        return Number.isInteger(this.state.value)
+    }
+
     getClassName() {
         if (this.isBlack()) {
             return 'black';
         }
-        return 'default';
+        if (this.isTag()) {
+            return 'tag';
+        }
+        return 'character';
     }
 
     updateCell() {
