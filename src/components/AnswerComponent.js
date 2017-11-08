@@ -6,6 +6,17 @@ import AnswerCellComponent from '../components/AnswerCellComponent'
 export default class AnswerComponent extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            appState : Store.getAppState(),
+        };
+    }
+
+    componentDidMount() {
+        Store.addEventListener(Store.LOAD_DATA, () => {
+            this.setState({
+                appState: Store.getAppState(),
+            });
+        });
     }
 
     render() {
@@ -13,6 +24,10 @@ export default class AnswerComponent extends React.Component {
     }
 
     createTable() {
+        if (this.state.appState == Store.STATE_INITIAL) {
+            return <tbody></tbody>
+        }
+        
         let tagMax = Store.getTagMax();
         var rowTh = [];
         var rowTd = [];

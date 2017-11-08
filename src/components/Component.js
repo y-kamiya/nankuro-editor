@@ -3,7 +3,7 @@ import Store from '../stores/Store'
 import AppActions from '../actions/AppActions'
 import AnswerComponent from '../components/AnswerComponent'
 import FieldComponent from '../components/FieldComponent'
-import ButtonComponent from '../components/ButtonComponent'
+import FileComponent from '../components/FileComponent'
 
 export default class Component extends React.Component {
     constructor() {
@@ -19,6 +19,7 @@ export default class Component extends React.Component {
     render() {
         return (
             <div>
+                <FileComponent />
                 <AnswerComponent />
                 <FieldComponent />
             </div>

@@ -5,12 +5,12 @@ import AppDispatcher from '../dispatcher/AppDispatcher'
 let instance = null;
 
 class Store extends EventEmitter {
-    get CREATE_FIELD() { return 'create_field' };
     get INPUT_ANSWER() { return 'input_answer' };
     get FOCUS_TAG() { return 'focus_tag' };
+    get LOAD_DATA() { return 'load_data' };
 
     get STATE_INITIAL() { return 0 };
-    get STATE_FIELD_CREATED() { return 1 };
+    get STATE_DATA_LOADED() { return 1 };
 
     get NO_CELL() { return -1 };
     get NO_ANSWER() { return "" };
@@ -25,10 +25,11 @@ class Store extends EventEmitter {
             rowNum: 5,
             colNum: 5,
         };
-        this.loadCells();
-        this.answers = [];
+        this.cells = [];
+        this.answers = {};
         this.focused_tag = 0;
         this.appState = this.STATE_INITIAL;
+
         AppDispatcher.register(this.onAction.bind(this));
         this.setMaxListeners(1000);
 
@@ -43,21 +44,12 @@ class Store extends EventEmitter {
         return this.appState;
     }
 
-    emitNewAppState() {
-        this.emit(this.CREATE_FIELD);
-    }
-
     addEventListener(event, callback) {
         this.on(event, callback);
     }
 
     onAction(payload) {
         switch (payload.actionType) {
-            case AppActions.CREATE_FIELD_ACTION:
-                // this.loadCells();
-                this.appState = this.STATE_FIELD_CREATED;
-                this.emitNewAppState();
-                break;
             case AppActions.INPUT_ANSWER_ACTION:
                 this.answers[payload.tag] = payload.value;
                 this.emit(this.INPUT_ANSWER);
@@ -66,12 +58,17 @@ class Store extends EventEmitter {
                 this.focused_tag = payload.tag;
                 this.emit(this.FOCUS_TAG);
                 break;
+            case AppActions.LOAD_DATA_ACTION:
+                this.appState = this.DATA_LOADED;
+                this.loadCells(payload.data);
+                this.emit(this.LOAD_DATA);
+                break;
         }
     }
 
-    loadCells() {
-        let data = require('./test.json');
-        this.cells = data.data;
+    loadCells(data) {
+        let json = JSON.parse(data);
+        this.cells = json.data;
         this.fieldSize.rowNum = this.cells.length;
         this.fieldSize.colNum = this.cells[0].length;
     }

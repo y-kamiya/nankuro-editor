@@ -12,6 +12,15 @@ export default class FieldComponent extends React.Component {
         };
     }
 
+    componentDidMount() {
+        Store.addEventListener(Store.LOAD_DATA, () => {
+            this.setState({
+                appState: Store.getAppState(),
+                fieldSize: Store.getFieldSize(),
+            });
+        });
+    }
+
     render() {
         return (
             <div id="field"><table>{this.createTable()}</table></div>
@@ -19,6 +28,10 @@ export default class FieldComponent extends React.Component {
     }
 
     createTable() {
+        if (this.state.appState == Store.STATE_INITIAL) {
+            return <tbody></tbody>
+        }
+
         let rowNum = this.state.fieldSize.rowNum;
         let colNum = this.state.fieldSize.colNum;
 
@@ -34,11 +47,6 @@ export default class FieldComponent extends React.Component {
         return <tbody>{table}</tbody>;
     }
 
-    componentDidMount() {
-        Store.addEventListener(Store.CREATE_FIELD, () => {
-            this.setState({appState: Store.getAppState()});
-        });
-    }
 }
 
 
