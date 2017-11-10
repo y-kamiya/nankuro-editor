@@ -15,7 +15,6 @@ export default class FileComponent extends React.Component {
         return (
             <div id="input">
                 <input type="file" onChange={this.onChange.bind(this)} />
-                <button>load</button>
                 <button>save</button>
             </div>
         );

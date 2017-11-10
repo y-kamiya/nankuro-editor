@@ -60,15 +60,16 @@ class Store extends EventEmitter {
                 break;
             case AppActions.LOAD_DATA_ACTION:
                 this.appState = this.DATA_LOADED;
-                this.loadCells(payload.data);
+                this.loadData(payload.data);
                 this.emit(this.LOAD_DATA);
                 break;
         }
     }
 
-    loadCells(data) {
+    loadData(data) {
         let json = JSON.parse(data);
         this.cells = json.data;
+        this.answers = json.answers;
         this.fieldSize.rowNum = this.cells.length;
         this.fieldSize.colNum = this.cells[0].length;
     }

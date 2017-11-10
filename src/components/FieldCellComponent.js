@@ -6,7 +6,7 @@ export default class FieldCellComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.tag,
+            value: this.getCellValue(),
             isFocused: false,
         }
     }
@@ -44,11 +44,14 @@ export default class FieldCellComponent extends React.Component {
         return 'character';
     }
 
-    updateCell() {
+    getCellValue() {
         let tag = this.props.tag;
         let value = Store.getAnswer(tag);
-        let updated = value === Store.NO_ANSWER ? tag : value;
-        this.setState({value: updated});
+        return value === Store.NO_ANSWER ? tag : value;
+    }
+
+    updateCell() {
+        this.setState({value: this.getCellValue()});
         this.setState({isFocused: false});
     }
 

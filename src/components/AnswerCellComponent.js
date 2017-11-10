@@ -7,6 +7,13 @@ export default class AnswerCellComponent extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+    }
+
+    getInitialValue() {
+        return Store.getAnswer(this.props.tag);
+    }
+
     onFocus(event) {
         AppActions.focusTag(this.props.tag);
     }
@@ -18,7 +25,7 @@ export default class AnswerCellComponent extends React.Component {
     }
 
     render() {
-        return <input type="text" onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} />
+        return <input type="text" defaultValue={this.getInitialValue()} onFocus={this.onFocus.bind(this)} onBlur={this.onBlur.bind(this)} />
     }
 }
 

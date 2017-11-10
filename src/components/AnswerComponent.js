@@ -33,7 +33,7 @@ export default class AnswerComponent extends React.Component {
         var rowTd = [];
         for (let tag = 1; tag <= tagMax; tag++) {
             rowTh.push(<th key={tag}>{tag}</th>);
-            rowTd.push(<td key={tag}><AnswerCellComponent key={tag} tag={tag} /></td>);
+            rowTd.push(<td key={tag}><AnswerCellComponent tag={tag} /></td>);
         }
         return (
             <tbody>
