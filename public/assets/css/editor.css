@@ -37,6 +37,15 @@ td > input[type=text] {
     text-align: center;
 }
 
+label input[type=file] {
+    display: none;
+}
+
+div .choose-file {
+    margin: auto;
+    width: 250px;
+}
+
 td.tag {
     font-size: 14px;
     text-align: left;

@@ -8,6 +8,7 @@ export default class FileComponent extends React.Component {
         this.reader = new FileReader();
         this.reader.addEventListener('load', this.onLoad.bind(this));
         this.state = {
+            appState: Store.getAppState(),
             blobUrl: "",
             blobUrlPrevious: "",
             filename: "", 
@@ -15,14 +16,33 @@ export default class FileComponent extends React.Component {
     }
 
     componentDidMount() {
-        Store.addEventListener(Store.INPUT_ANSWER, this.updateBlobUrl.bind(this));
+        Store.addEventListener(Store.INPUT_ANSWER, this.onInputAnswer.bind(this));
+        Store.addEventListener(Store.LOAD_DATA, () => {
+            this.setState({ appState: Store.getAppState() });
+        });
     }
     render() {
         return (
-            <div id="input">
-                <input type="file" onChange={this.onChange.bind(this)} />
-                <a href={this.state.blobUrl} download={this.state.filename}>save</a>
+            <div className="input-group choose-file">
+                <label className="input-group-btn">{this.createButton()}</label>
+                <input type="text" className="form-control" value={this.state.filename} readOnly />
             </div>
+        );
+    }
+
+    createButton() {
+        if (this.state.appState == Store.STATE_INITIAL) {
+            return (
+                <span className="btn btn-primary">
+                    Choose file
+                    <input type="file" onChange={this.onChange.bind(this)} />
+                </span>
+            );
+        }
+        return (
+            <span>
+                <a className="btn btn-success" href={this.state.blobUrl} download={this.state.filename}>Save file</a>
+            </span>
         );
     }
 
@@ -34,15 +54,15 @@ export default class FileComponent extends React.Component {
 
     onLoad(event) {
         AppActions.loadData(this.reader.result);
-        this.updateBlobUrl();
     }
 
-    updateBlobUrl() {
+    onInputAnswer() {
         let data = Store.getDataSaved();
         let blob = new Blob([data], {type: 'text/plain;charset=UTF-8'});
         let blobUrl = URL.createObjectURL(blob);
         URL.revokeObjectURL(this.state.blobUrlPrevious);
         this.setState({
+            appState: Store.getAppState(),
             blobUrl: blobUrl,
             blobUrlPrevious: this.state.blobUrl
         });
