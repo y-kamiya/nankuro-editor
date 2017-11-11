@@ -43,6 +43,7 @@ label input[type=file] {
 
 div .choose-file {
     margin: auto;
+    margin-top: 20px;
     width: 250px;
 }
 

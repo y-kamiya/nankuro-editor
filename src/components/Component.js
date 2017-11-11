@@ -19,9 +19,9 @@ export default class Component extends React.Component {
     render() {
         return (
             <div>
-                <FileComponent />
                 <AnswerComponent />
                 <FieldComponent />
+                <FileComponent />
             </div>
         );
     }

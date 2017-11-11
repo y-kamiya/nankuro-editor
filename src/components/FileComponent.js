@@ -20,7 +20,10 @@ export default class FileComponent extends React.Component {
         Store.addEventListener(Store.LOAD_DATA, () => {
             this.setState({ appState: Store.getAppState() });
         });
+        // for debug
+        // AppActions.loadData(JSON.stringify(require('./test.json')));
     }
+
     render() {
         return (
             <div className="input-group choose-file">
