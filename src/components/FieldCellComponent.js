@@ -11,6 +11,11 @@ export default class FieldCellComponent extends React.Component {
         }
     }
 
+    componentDidMount() {
+        Store.addEventListener(Store.INPUT_ANSWER, this.updateCell.bind(this));
+        Store.addEventListener(Store.FOCUS_TAG, this.focusTag.bind(this));
+    }
+
     render() {
         let className = this.getClassName();
         let value = this.isBlack() ? "" : this.state.value;
@@ -62,10 +67,6 @@ export default class FieldCellComponent extends React.Component {
         this.setState({isFocused: true});
     }
 
-    componentDidMount() {
-        Store.addEventListener(Store.INPUT_ANSWER, this.updateCell.bind(this));
-        Store.addEventListener(Store.FOCUS_TAG, this.focusTag.bind(this));
-    }
 }
 
 

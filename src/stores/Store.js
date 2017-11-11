@@ -74,6 +74,13 @@ class Store extends EventEmitter {
         this.fieldSize.colNum = this.cells[0].length;
     }
 
+    getDataSaved() {
+        return JSON.stringify({
+            'data': this.cells,
+            'answers': this.answers,
+        });
+    }
+
     getTagMax() {
         let flattened = Array.prototype.concat.apply([], this.cells);
         let filtered = flattened.filter(Number.isInteger);
