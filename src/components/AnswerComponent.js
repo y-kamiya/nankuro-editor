@@ -51,6 +51,9 @@ export default class AnswerComponent extends React.Component {
 
         var body = [];
         for (var group of groups) {
+            if (group.length == 0) {
+                break;
+            }
             var rowTh = [];
             var rowTd = [];
             for (var tag of group) {
