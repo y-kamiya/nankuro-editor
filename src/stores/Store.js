@@ -68,8 +68,8 @@ class Store extends EventEmitter {
 
     loadData(data) {
         let json = JSON.parse(data);
-        this.cells = json.data;
-        this.answers = json.answers;
+        this.cells = json.data || {};
+        this.answers = json.answers || {};
         this.fieldSize.rowNum = this.cells.length;
         this.fieldSize.colNum = this.cells[0].length;
     }
