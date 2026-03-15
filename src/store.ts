@@ -24,7 +24,13 @@ export const useStore = create<Store>((set, get) => ({
   isLoaded: false,
 
   loadData: (jsonText) => {
-    const json: PuzzleJson = JSON.parse(jsonText)
+    let json: PuzzleJson
+    try {
+      json = JSON.parse(jsonText)
+    } catch {
+      alert('Invalid JSON file.')
+      return
+    }
     set({
       cells: json.data ?? [],
       answers: json.answers ?? {},

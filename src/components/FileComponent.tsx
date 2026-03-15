@@ -29,6 +29,7 @@ export default function FileComponent() {
     filenameRef.current = file.name
     const reader = new FileReader()
     reader.onload = () => loadData(reader.result as string)
+    reader.onerror = () => alert('Failed to read file.')
     reader.readAsText(file)
   }
 
