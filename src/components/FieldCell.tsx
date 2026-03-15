@@ -10,10 +10,12 @@ export default function FieldCell({ tag }: Props) {
     return <td className="black" />
   }
 
-  const hasAnswer = answer !== ''
-  const className = [hasAnswer ? 'character' : 'tag', isFocused ? 'focused' : '']
-    .filter(Boolean)
-    .join(' ')
+  const className = ['answer-cell', answer ? 'has-answer' : '', isFocused ? 'focused' : ''].filter(Boolean).join(' ')
 
-  return <td className={className}>{hasAnswer ? answer : tag}</td>
+  return (
+    <td className={className}>
+      <span className="tag-number">{tag}</span>
+      {answer && <span className="answer-char">{answer}</span>}
+    </td>
+  )
 }

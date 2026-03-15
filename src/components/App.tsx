@@ -9,7 +9,7 @@ export default function App() {
       <div className="card">
         <AnswerComponent />
       </div>
-      <div className="card">
+      <div className="card grid-card">
         <FieldComponent />
       </div>
       <FileComponent />

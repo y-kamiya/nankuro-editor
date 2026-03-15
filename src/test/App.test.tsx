@@ -60,8 +60,8 @@ describe('2. Grid display', () => {
   it('2-2: cells without answers show tag number', () => {
     render(<App />)
     loadJson(PROBLEM_JSON)
-    const tagCells = document.querySelectorAll('td.tag')
-    const texts = Array.from(tagCells).map((el) => el.textContent)
+    const tagNumbers = document.querySelectorAll('td.answer-cell:not(.has-answer) .tag-number')
+    const texts = Array.from(tagNumbers).map((el) => el.textContent)
     expect(texts).toContain('1')
     expect(texts).toContain('2')
     // 黒マスにはタグ番号が表示されない
@@ -81,14 +81,14 @@ describe('3. Answer input interaction', () => {
     await user.type(inputs[0], 'ア') // tag=1 に入力
 
     // tag=1 のセルが正確に3つ全て 'ア' になる
-    const characterCells = document.querySelectorAll('td.character')
-    const texts = Array.from(characterCells).map((el) => el.textContent)
+    const answerChars = document.querySelectorAll('td.has-answer .answer-char')
+    const texts = Array.from(answerChars).map((el) => el.textContent)
     expect(texts).toHaveLength(TAG1_COUNT)
     expect(texts.every((t) => t === 'ア')).toBe(true)
 
     // tag=2 のセルは変わらずタグ番号のまま
-    const tagCells = document.querySelectorAll('td.tag')
-    const tagTexts = Array.from(tagCells).map((el) => el.textContent)
+    const tagNumbers = document.querySelectorAll('td.answer-cell:not(.has-answer) .tag-number')
+    const tagTexts = Array.from(tagNumbers).map((el) => el.textContent)
     expect(tagTexts.filter((t) => t === '2')).toHaveLength(TAG2_COUNT)
   })
 
@@ -124,16 +124,16 @@ describe('3. Answer input interaction', () => {
     loadJson(ANSWER_JSON)
 
     // 初期状態: tag=1 のセルは 'ア' で表示
-    const initialCharCells = document.querySelectorAll('td.character')
-    const initialTexts = Array.from(initialCharCells).map((el) => el.textContent)
+    const initialAnswerChars = document.querySelectorAll('td.has-answer .answer-char')
+    const initialTexts = Array.from(initialAnswerChars).map((el) => el.textContent)
     expect(initialTexts.filter((t) => t === 'ア')).toHaveLength(TAG1_COUNT)
 
     const inputs = screen.getAllByRole('textbox')
     await user.clear(inputs[0]) // tag=1 の解答を空に
 
     // tag=1 のセルが全てタグ番号 '1' に戻る
-    const tagCells = document.querySelectorAll('td.tag')
-    const tagTexts = Array.from(tagCells).map((el) => el.textContent)
+    const tagNumbers = document.querySelectorAll('td.answer-cell:not(.has-answer) .tag-number')
+    const tagTexts = Array.from(tagNumbers).map((el) => el.textContent)
     expect(tagTexts.filter((t) => t === '1')).toHaveLength(TAG1_COUNT)
   })
 })
@@ -166,11 +166,11 @@ describe('4. Save file', () => {
     loadJson(savedJson)
 
     // 再読み込み後、グリッドに解答が表示される
-    const characterCells = document.querySelectorAll('td.character')
-    const texts = Array.from(characterCells).map((el) => el.textContent)
+    const answerChars = document.querySelectorAll('td.has-answer .answer-char')
+    const texts = Array.from(answerChars).map((el) => el.textContent)
     expect(texts).toContain('ウ')
     expect(texts).toContain('エ')
     // タグ番号のままのセルがない（全タグに解答が入っている）
-    expect(document.querySelectorAll('td.tag')).toHaveLength(0)
+    expect(document.querySelectorAll('td.answer-cell:not(.has-answer)')).toHaveLength(0)
   })
 })

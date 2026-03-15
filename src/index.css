@@ -4,13 +4,17 @@
   --color-primary-dark: #3a54d4;
   --color-success: #2da868;
   --color-success-dark: #228a54;
-  --color-border: #94a3b8;
-  --color-border-light: #cbd5e1;
+  --color-border: #000000;
+  --color-border-light: #000000;
   --color-cell-bg: #e2e8f0;
-  --color-cell-black: #334155;
-  --color-focused-bg: #4f6af0;
-  --color-focused-text: white;
-  --color-bg: #f8fafc;
+  --color-cell-black: #000000;
+  --color-cell-white: #ffffff;
+  --color-focused-bg: #fffde7;
+  --color-focused-text: #1e293b;
+  --color-focused-ring: #f59e0b;
+  --color-tag-number: #444444;
+  --color-answer-char: #000000;
+  --color-bg: #f0f0f0;
   --color-text: #1e293b;
 
   /* Spacing */
@@ -30,7 +34,7 @@
   /* Cell */
   --cell-size: 50px;
   --cell-border-width: 1px;
-  --cell-border: var(--cell-border-width) solid var(--color-border-light);
+  --cell-border: var(--cell-border-width) solid var(--color-border);
 
   /* UI */
   --border-radius: 8px;
@@ -68,9 +72,17 @@ h1 {
   padding: var(--space-xl);
 }
 
+.card.grid-card {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
 table {
   border-collapse: collapse;
   margin: auto;
+  border: 2px solid var(--color-border);
 }
 
 table th {
@@ -87,15 +99,47 @@ table th {
 table td {
   width: var(--cell-size);
   height: var(--cell-size);
-  font-size: var(--font-size-md);
   border: var(--cell-border);
   padding: 0;
   text-align: center;
+  background-color: var(--color-cell-white);
+  position: relative;
   transition: background-color var(--transition-speed) ease;
 }
 
 table td.black {
   background-color: var(--color-cell-black);
+}
+
+table td.answer-cell {
+  background-color: var(--color-cell-white);
+}
+
+table td.answer-cell.focused {
+  background-color: var(--color-focused-bg);
+  box-shadow: inset 0 0 0 2px var(--color-focused-ring);
+}
+
+.tag-number {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: 0.5rem;
+  line-height: 1;
+  color: var(--color-tag-number);
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.answer-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size-lg);
+  color: var(--color-answer-char);
+  font-weight: 400;
 }
 
 td > input[type='text'] {
@@ -105,6 +149,8 @@ td > input[type='text'] {
   border: none;
   outline: none;
   font-size: var(--font-size-md);
+  font-family: var(--font-family);
+  background: transparent;
 }
 
 label input[type='file'] {
@@ -222,19 +268,3 @@ label input[type='file'] {
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-td.tag {
-  font-size: var(--font-size-sm);
-  text-align: left;
-  vertical-align: top;
-  padding-left: var(--space-xs);
-}
-
-td.character {
-  font-size: var(--font-size-lg);
-}
-
-td.focused {
-  background-color: var(--color-focused-bg);
-  color: var(--color-focused-text);
-  box-shadow: inset 0 0 0 2px var(--color-primary-dark);
-}
