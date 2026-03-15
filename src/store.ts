@@ -43,5 +43,8 @@ export const useStore = create<Store>((set, get) => ({
     return JSON.stringify({ data: cells, answers })
   },
 
-  getTagMax: () => Math.max(...get().cells.flat()),
+  getTagMax: () => {
+    const flat = get().cells.flat()
+    return flat.length === 0 ? 0 : Math.max(...flat)
+  },
 }))

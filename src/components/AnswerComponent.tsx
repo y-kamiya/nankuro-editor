@@ -37,7 +37,7 @@ export default function AnswerComponent() {
 
   if (!isLoaded) return <table><tbody /></table>
 
-  const tagMax = Math.max(...cells.flat())
+  const tagMax = cells.flat().length === 0 ? 0 : Math.max(...cells.flat())
   const tags = Array.from({ length: tagMax }, (_, i) => i + 1)
   const colNum = Math.max(1, calcColumnNum(windowWidth, tagMax))
   const groups = chunk(tags, colNum)
@@ -45,8 +45,8 @@ export default function AnswerComponent() {
   return (
     <table>
       <tbody>
-        {groups.map((group, gi) => (
-          <Fragment key={gi}>
+        {groups.map((group) => (
+          <Fragment key={group[0]}>
             <tr>
               {group.map((tag) => <th key={tag}>{tag}</th>)}
             </tr>

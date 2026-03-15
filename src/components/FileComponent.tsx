@@ -20,7 +20,8 @@ export default function FileComponent() {
       return url
     })
     return () => URL.revokeObjectURL(url)
-  }, [isLoaded, answers, getDataSaved])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, answers])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
