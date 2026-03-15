@@ -42,16 +42,35 @@ body {
   font-family: var(--font-family);
   background-color: var(--color-bg);
   color: var(--color-text);
+  min-height: 100vh;
 }
 
 h1 {
-  margin: var(--space-lg) 0;
+  margin: var(--space-xl) 0 var(--space-lg);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  padding: var(--space-xl);
 }
 
 table {
   border-collapse: collapse;
   margin: auto;
-  margin-top: var(--space-lg);
 }
 
 table th {
@@ -93,8 +112,10 @@ label input[type='file'] {
 }
 
 .choose-file {
-  margin: var(--space-lg) auto 0;
-  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 .btn-primary {

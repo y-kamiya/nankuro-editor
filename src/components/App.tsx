@@ -4,10 +4,14 @@ import FileComponent from './FileComponent'
 
 export default function App() {
   return (
-    <div>
+    <div className="app-container">
       <h1>Nankuro Editor</h1>
-      <AnswerComponent />
-      <FieldComponent />
+      <div className="card">
+        <AnswerComponent />
+      </div>
+      <div className="card">
+        <FieldComponent />
+      </div>
       <FileComponent />
     </div>
   )
