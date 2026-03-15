@@ -1,14 +1,46 @@
-# Overview
-tool to help solving puzzle of nankuro 
+# nankuro-editor
 
-# Use
+A tool to help solving nankuro puzzles.
+
+## Usage
+
 https://y-kamiya.github.io/nankuro-editor/public/
 
-select json file that have problem or answer data like in examples directory
+Load a JSON file like the examples in the `examples` directory.
 
-# Development
-if you have docker environment, you can build by command below  
-`$ docker-compose run --rm node npm run build`
+```json
+{
+  "data": [[1, 2, 3], ...],
+  "answers": { "1": "ア", "2": "イ" }
+}
+```
 
-and it is useful to use watch  
-` $ docker-compose run --rm node npm run watch`
+## Development
+
+### Requirements
+
+- Node.js
+
+### Setup
+
+```bash
+npm install
+```
+
+### Start dev server
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview build
+
+```bash
+npm run preview
+```
