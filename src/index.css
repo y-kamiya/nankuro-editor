@@ -21,10 +21,11 @@
   --space-xl: 32px;
 
   /* Typography */
-  --font-size-xs: 8px;
-  --font-size-sm: 14px;
-  --font-size-md: 16pt;
-  --font-size-lg: 36px;
+  --font-family: 'Noto Sans JP', sans-serif;
+  --font-size-xs: 0.5rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 2rem;
 
   /* Cell */
   --cell-size: 50px;
@@ -37,7 +38,7 @@
 
 body {
   text-align: center;
-  font-family: sans-serif;
+  font-family: var(--font-family);
   background-color: var(--color-bg);
   color: var(--color-text);
 }
