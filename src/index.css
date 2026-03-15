@@ -118,6 +118,57 @@ label input[type='file'] {
   gap: var(--space-sm);
 }
 
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 280px;
+  padding: var(--space-xl) var(--space-lg);
+  border: 2px dashed var(--color-border-light);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+  color: var(--color-border);
+  font-size: var(--font-size-sm);
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: var(--color-primary);
+  background-color: rgba(79, 106, 240, 0.04);
+  color: var(--color-primary);
+}
+
+.drop-zone-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.file-name-input {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  text-align: center;
+  outline: none;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.file-name-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 106, 240, 0.15);
+}
+
+.file-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .btn-primary {
   display: inline-block;
   padding: var(--space-sm) var(--space-lg);
