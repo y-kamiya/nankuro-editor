@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useStore } from '../store'
 
 export default function FileComponent() {
@@ -7,7 +7,7 @@ export default function FileComponent() {
   const loadData = useStore((s) => s.loadData)
   const getDataSaved = useStore((s) => s.getDataSaved)
 
-  const filenameRef = useRef('puzzle.json')
+  const [filename, setFilename] = useState('puzzle.json')
   const [blobUrl, setBlobUrl] = useState('')
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function FileComponent() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    filenameRef.current = file.name
+    setFilename(file.name)
     const reader = new FileReader()
     reader.onload = () => loadData(reader.result as string)
     reader.onerror = () => alert('Failed to read file.')
@@ -46,7 +46,12 @@ export default function FileComponent() {
 
   return (
     <div className="choose-file">
-      <a className="btn-success" href={blobUrl} download={filenameRef.current}>
+      <input
+        type="text"
+        value={filename}
+        onChange={(e) => setFilename(e.target.value)}
+      />
+      <a className="btn-success" href={blobUrl} download={filename}>
         Save file
       </a>
     </div>
