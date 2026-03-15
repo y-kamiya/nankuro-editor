@@ -22,7 +22,7 @@ function chunk<T>(array: T[], size: number): T[][] {
 
 export default function AnswerComponent() {
   const isLoaded = useStore((s) => s.isLoaded)
-  const cells = useStore((s) => s.cells)
+  const getTagMax = useStore((s) => s.getTagMax)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function AnswerComponent() {
 
   if (!isLoaded) return <table><tbody /></table>
 
-  const tagMax = cells.flat().length === 0 ? 0 : Math.max(...cells.flat())
+  const tagMax = getTagMax()
   const tags = Array.from({ length: tagMax }, (_, i) => i + 1)
   const colNum = Math.max(1, calcColumnNum(windowWidth, tagMax))
   const groups = chunk(tags, colNum)
