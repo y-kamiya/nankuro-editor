@@ -29,7 +29,7 @@
 
   /* Cell */
   --cell-size: 50px;
-  --cell-border-width: 2px;
+  --cell-border-width: 1px;
   --cell-border: var(--cell-border-width) solid var(--color-border-light);
 
   /* UI */
@@ -72,6 +72,7 @@ table td {
   border: var(--cell-border);
   padding: 0;
   text-align: center;
+  transition: background-color var(--transition-speed) ease;
 }
 
 table td.black {
@@ -163,4 +164,5 @@ td.character {
 td.focused {
   background-color: var(--color-focused-bg);
   color: var(--color-focused-text);
+  box-shadow: inset 0 0 0 2px var(--color-primary-dark);
 }
