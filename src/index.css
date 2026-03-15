@@ -1,13 +1,17 @@
 :root {
   /* Colors */
-  --color-primary: #337ab7;
-  --color-primary-dark: #2a6399;
-  --color-success: #5cb85c;
-  --color-success-dark: #4cae4c;
-  --color-border: #808080;
-  --color-cell-bg: #bfbfbf;
-  --color-focused-bg: #337ab7;
+  --color-primary: #4f6af0;
+  --color-primary-dark: #3a54d4;
+  --color-success: #2da868;
+  --color-success-dark: #228a54;
+  --color-border: #94a3b8;
+  --color-border-light: #cbd5e1;
+  --color-cell-bg: #e2e8f0;
+  --color-cell-black: #334155;
+  --color-focused-bg: #4f6af0;
   --color-focused-text: white;
+  --color-bg: #f8fafc;
+  --color-text: #1e293b;
 
   /* Spacing */
   --space-xs: 4px;
@@ -25,7 +29,7 @@
   /* Cell */
   --cell-size: 50px;
   --cell-border-width: 2px;
-  --cell-border: var(--cell-border-width) solid var(--color-border);
+  --cell-border: var(--cell-border-width) solid var(--color-border-light);
 
   /* UI */
   --border-radius: 4px;
@@ -34,6 +38,8 @@
 body {
   text-align: center;
   font-family: sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 h1 {
@@ -54,6 +60,7 @@ table th {
   padding: 0;
   text-align: center;
   background-color: var(--color-cell-bg);
+  color: var(--color-text);
 }
 
 table td {
@@ -66,7 +73,7 @@ table td {
 }
 
 table td.black {
-  background-color: var(--color-cell-bg);
+  background-color: var(--color-cell-black);
 }
 
 td > input[type='text'] {
