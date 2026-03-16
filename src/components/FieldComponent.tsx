@@ -5,7 +5,7 @@ export default function FieldComponent() {
   const cells = useStore((s) => s.cells)
   const isLoaded = useStore((s) => s.isLoaded)
 
-  if (!isLoaded) return <div id="field" />
+  if (!isLoaded) return null
 
   return (
     <div id="field">
