@@ -10,7 +10,8 @@ export default function FieldCell({ tag }: Props) {
     return <td className="black" />
   }
 
-  const className = ['answer-cell', answer ? 'has-answer' : '', isFocused ? 'focused' : ''].filter(Boolean).join(' ')
+  const displayChar = [...answer][0] ?? ''
+  const className = ['answer-cell', displayChar ? 'has-answer' : '', isFocused ? 'focused' : ''].filter(Boolean).join(' ')
 
   const onClick = () => {
     document.getElementById(`answer-input-${tag}`)?.focus()
@@ -19,7 +20,7 @@ export default function FieldCell({ tag }: Props) {
   return (
     <td className={className} onClick={onClick} style={{ cursor: 'pointer' }}>
       <span className="tag-number">{tag}</span>
-      {answer && <span className="answer-char">{answer}</span>}
+      {displayChar && <span className="answer-char">{displayChar}</span>}
     </td>
   )
 }
