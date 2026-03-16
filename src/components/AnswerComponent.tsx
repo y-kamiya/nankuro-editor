@@ -35,7 +35,7 @@ export default function AnswerComponent() {
     return () => window.removeEventListener('resize', handler)
   }, [])
 
-  if (!isLoaded) return <table><tbody /></table>
+  if (!isLoaded) return null
 
   const tagMax = getTagMax()
   const tags = Array.from({ length: tagMax }, (_, i) => i + 1)

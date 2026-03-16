@@ -9,6 +9,7 @@ export default function AnswerCell({ tag }: Props) {
 
   return (
     <input
+      id={`answer-input-${tag}`}
       type="text"
       value={answer}
       onChange={(e) => setAnswer(tag, e.target.value)}
